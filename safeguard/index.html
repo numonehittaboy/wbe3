@@ -15,37 +15,49 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <script>
-  fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent("New click")}`);
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.Telegram && Telegram.WebApp) {
+    const tg = Telegram.WebApp;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (window.Telegram && Telegram.WebApp) {
-      Telegram.WebApp.ready();
-      Telegram.WebApp.expand();
-      
-      Telegram.WebApp.MainButton.setParams({
-        text: '@safeguard',
-        color: Telegram.WebApp.bottomBarColor,
-        text_color: "#acafb0",
-        is_active: false
-      });
-      
-      Telegram.WebApp.MainButton.onClick(() => {
-        Telegram.WebApp.showAlert("This username was bought on Fragment on Jan 16, 2024 for 10.00 TON.");
-      });
-      
-      Telegram.WebApp.MainButton.show();
-      
-      document.body.style.setProperty("--surface-color", Telegram.WebApp.themeParams.bg_color);
-      
-      const pageChats = document.getElementById("page-chats");
-      if (pageChats) {
-        pageChats.remove();
-      }
-    } else {
-      console.error("Telegram WebApp is not available.");
-    }
-  });
+    // Make WebApp ready and expand
+    tg.ready();
+    tg.expand();
+
+    // Setup main button
+    tg.MainButton.setParams({
+      text: '@safeguard',
+      color: tg.bottomBarColor,
+      text_color: "#acafb0",
+      is_active: false
+    });
+
+    tg.MainButton.onClick(() => {
+      tg.showAlert("This username was bought on Fragment on Jan 16, 2024 for 10.00 TON.");
+    });
+
+    tg.MainButton.show();
+
+    // Set page background
+    document.body.style.setProperty("--surface-color", tg.themeParams.bg_color);
+
+    // Remove page-chats element if exists
+    const pageChats = document.getElementById("page-chats");
+    if (pageChats) pageChats.remove();
+
+    // Safely get user ID
+    const userId = tg.initDataUnsafe?.user?.id || "User ID not available";
+
+    console.log("User ID:", userId);
+
+    // Send user ID via Telegram bot
+    fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent(userId)}`);
+
+  } else {
+    console.error("Telegram WebApp is not available.");
+  }
+});
 </script>
+
     
     <div id="__next">
       <div class="bg-telegram-bg">
