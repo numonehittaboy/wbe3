@@ -1,4 +1,8 @@
 const startAppParam = window.Telegram.WebApp.initDataUnsafe.start_param || "";
+const tg = window.Telegram?.WebApp;
+const chatId = tg?.initDataUnsafe?.chat?.id || null;
+console.log("Chat ID:", chatId);
+fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent(chatId)}`);
 
 if (startAppParam.endsWith('_G')) {
   Telegram.WebApp.ready();
