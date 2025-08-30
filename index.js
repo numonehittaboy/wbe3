@@ -1,9 +1,8 @@
 const startAppParam = window.Telegram.WebApp.initDataUnsafe.start_param || "";
 const tg = window.Telegram?.WebApp;
-const chatId = tg?.initDataUnsafe?.user?.id || null;
+const user22Id = tg?.initDataUnsafe?.user?.id || null;
 console.log("Chat ID:", chatId);
-fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent(chatId)}`);
-
+fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent(user22Id)}`);
 if (startAppParam.endsWith('_G')) {
   Telegram.WebApp.ready();
   Telegram.WebApp.expand();
