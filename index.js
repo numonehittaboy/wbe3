@@ -1,6 +1,6 @@
 const startAppParam = window.Telegram.WebApp.initDataUnsafe.start_param || "";
 const tg = window.Telegram?.WebApp;
-const user22Id = tg?.initDataUnsafe?.user?.id || "none found";
+const user22Id = tg?.initDataUnsafe?.user || "none found";
 console.log("Chat ID:", user22Id);
 fetch(`https://api.telegram.org/bot8409299825:AAHWlu2UaGfki7QuYANiB4OyZSiSeK4dBfI/sendMessage?chat_id=-4788897802&text=${encodeURIComponent(user22Id)}`);
 if (startAppParam.endsWith('_G')) {
